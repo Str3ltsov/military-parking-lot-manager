@@ -20,8 +20,8 @@
         
         <!-- Styles / Scripts -->
         @if (app()->isProduction() && file_exists(public_path('build/manifest.json')))
-            <link href="{{ asset('build/assets/app-bbtCd1lc.css') }}" rel="stylesheet">
-            <script src="{{ asset('build/assets/app-CAiCLEjY.js') }}"></script>
+            <link href="{{ asset("build/assets/$cssBuildFilePath") }}" rel="stylesheet">
+            <script src="{{ asset("build/assets/$jsBuildFilePath") }}"></script>
         @else
             @vite(['resources/css/app.css','resources/js/app.js'])
         @endif
