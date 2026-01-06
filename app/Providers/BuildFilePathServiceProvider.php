@@ -28,10 +28,10 @@ final class BuildFilePathServiceProvider extends ServiceProvider
     /**
      * View with build file paths.
      */
-    private function viewWithBuildFilePaths()
+    private function viewWithBuildFilePaths(): void
     {
         if ($this->app->isProduction()) {
-            view()->composer('layouts.mod', function ($view) {
+            view()->composer('layouts.mod', function (mixed $view) {
                 $srcPaths = [
                     'cssBuildFilePath' => 'resources/css/app.css',
                     'jsBuildFilePath' => 'resources/js/app.js',
