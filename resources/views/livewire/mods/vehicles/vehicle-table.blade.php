@@ -19,7 +19,7 @@
             <tbody>
                 @forelse ($vehicles as $vehicle)
                     <tr>
-                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $vehicles->firstItem() + $loop->index }}</td>
                         <td>{{ $vehicle->department->name }}</td>
                         <td>{{ $vehicle->reproduction->nameWithBrand() }}</td>
                         <td>{{ $vehicle->plate_number }}</td>
