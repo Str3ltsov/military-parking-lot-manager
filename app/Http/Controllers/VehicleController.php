@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+
 final class VehicleController
 {
-    public function __construct() {}
-
     /**
      * Get vehicles page.
      */
-    public function index()
+    public function index(): View
     {
         return view('mods.vehicles.index');
     }
