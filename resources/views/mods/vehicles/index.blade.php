@@ -1,5 +1,5 @@
 @extends('layouts.mod')
 
 @section('content')
-    <livewire:vehicle-table />
+    <livewire:mods.vehicles.vehicle-table />
 @endsection

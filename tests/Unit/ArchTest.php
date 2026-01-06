@@ -26,6 +26,7 @@ arch('Avoid mutation')
         'App\Models',
         'App\Providers',
         'App\Services',
+        'App\Livewire',
     ]);
 
 arch('Avoid inheritance')
@@ -38,6 +39,7 @@ arch('Avoid inheritance')
         'App\Models',
         'App\Providers',
         'App\Services',
+        'App\Livewire',
     ]);
 
 arch('Avoid extension')
