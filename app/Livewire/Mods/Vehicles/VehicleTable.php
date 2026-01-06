@@ -14,24 +14,11 @@ final class VehicleTable extends Component
     use WithPagination;
 
     /**
-     * @var VehicleService instance.
-     */
-    private VehicleService $vehicleService;
-
-    /**
-     * Vehicle table constructor.
-     */
-    public function mount(VehicleService $vehicleService): void
-    {
-        $this->vehicleService = $vehicleService;
-    }
-
-    /**
      * Vehicle table controller.
      */
-    public function render(): View
+    public function render(VehicleService $vehicleService): View
     {
-        $vehicles = $this->vehicleService->getPaginatedVehicles(20);
+        $vehicles = $vehicleService->getPaginatedVehicles(20);
 
         return view('livewire.mods.vehicles.vehicle-table', [
             'vehicles' => $vehicles,
