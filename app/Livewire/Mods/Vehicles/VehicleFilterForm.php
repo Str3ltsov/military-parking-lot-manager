@@ -6,6 +6,7 @@ namespace App\Livewire\Mods\Vehicles;
 
 use App\Enums\VehicleCondition;
 use App\Enums\VehicleStatus;
+use App\Services\DepartmentService;
 use DateTimeImmutable;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -39,13 +40,15 @@ final class VehicleFilterForm extends Component
     /**
      * Vehicle filter form controller.
      */
-    public function render(): View
+    public function render(DepartmentService $departmentService): View
     {
+        $departments = $departmentService->getAllDepartments();
         $conditions = VehicleCondition::cases();
         $statuses = VehicleStatus::cases();
 
         return view('livewire.mods.vehicles.vehicle-filter-form')
             ->with([
+                'departments' => $departments,
                 'conditions' => $conditions,
                 'statuses' => $statuses,
             ]);

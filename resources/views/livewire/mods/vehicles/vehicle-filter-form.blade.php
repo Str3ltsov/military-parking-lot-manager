@@ -6,6 +6,9 @@
             id="department"
         >
             <option value="">---</option>
+            @foreach ($departments as $department)
+                <option value="{{ $department->name }}">{{ $department->name }}</option>
+            @endforeach
         </select>
     </div>
     <div>
