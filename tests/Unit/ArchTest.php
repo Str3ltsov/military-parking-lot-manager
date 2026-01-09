@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 arch()->preset()->php();
 arch()->preset()->laravel()
     ->ignoring([
+        'App\Dtos',
         'App\Providers\Filament',
     ]);
 arch()->preset()->security();
@@ -23,6 +24,7 @@ arch('Avoid mutation')
     ->ignoring([
         'App\Console\Commands',
         'App\Http\Controllers',
+        'App\Http\Requests',
         'App\Models',
         'App\Providers',
         'App\Services',
@@ -36,6 +38,7 @@ arch('Avoid inheritance')
     ->ignoring([
         'App\Console\Commands',
         'App\Http\Controllers',
+        'App\Http\Requests',
         'App\Models',
         'App\Providers',
         'App\Services',

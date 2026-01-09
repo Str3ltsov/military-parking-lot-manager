@@ -25,11 +25,15 @@
         @else
             @vite(['resources/css/app.css','resources/js/app.js'])
         @endif
+
+        @livewireStyles
     </head>
     <body>
         <!-- Main content -->
         <main>
             @yield('content')
         </main>
+        
+        @livewireScripts
     </body>
 </html>
