@@ -71,6 +71,34 @@ final class VehicleFilterForm extends Component
     }
 
     /**
+     * Dispatch event when any filter property changes.
+     */
+    public function updated(string $property): void
+    {
+        $filterProperties = [
+            'department',
+            'brand',
+            'number',
+            'assigned',
+            'condition',
+            'location',
+            'expected_to_return',
+            'status',
+        ];
+
+        // Normalize empty strings to null immediately.
+        if (in_array($property, $filterProperties, true)) {
+            $value = $this->{$property};
+
+            if (is_string($value) && $value === '') {
+                $this->{$property} = null;
+            }
+
+            $this->dispatchToVehicleTable();
+        }
+    }
+
+    /**
      * Vehicle filter form controller.
      */
     public function render(DepartmentService $departmentService): View|RedirectResponse

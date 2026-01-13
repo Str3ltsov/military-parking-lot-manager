@@ -28,6 +28,7 @@ arch('Avoid mutation')
         'App\Models',
         'App\Providers',
         'App\Services',
+        'App\Queries',
         'App\Livewire',
     ]);
 
@@ -42,6 +43,7 @@ arch('Avoid inheritance')
         'App\Models',
         'App\Providers',
         'App\Services',
+        'App\Queries',
         'App\Livewire',
     ]);
 
@@ -66,6 +68,7 @@ arch('Models')
         'App\Models',
         'App\Providers',
         'App\Services',
+        'App\Queries',
         'Database\Factories',
         'Database\Seeders',
     ]);

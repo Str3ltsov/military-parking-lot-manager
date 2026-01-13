@@ -98,31 +98,8 @@
 </div>
 
 @script
-    {{-- Call livewire dispatch on load and when one of the vehicle form filter changes. --}}
+    {{-- Dispatch on initial load to sync with URL parameters --}}
     <script>
-        const callDispatch = () => $wire.call('dispatchToVehicleTable')
-
-        const callDispatchOnFilterChange = () => {
-            const department = document.getElementById('department')
-            const brand = document.getElementById('brand')
-            const number = document.getElementById('number')
-            const assigned = document.getElementById('assigned')
-            const condition = document.getElementById('condition')
-            const location = document.getElementById('location')
-            const expected_to_return = document.getElementById('expected_to_return')
-            const status = document.getElementById('status')
-
-            const filters = [department, brand, number, assigned, condition, location, expected_to_return, status]
-
-            for (let filter of filters) {
-                filter.addEventListener('change', event => {
-                    event.preventDefault()
-                    callDispatch()
-                })
-            }
-        }
-
-        callDispatch()
-        callDispatchOnFilterChange()
+        $wire.call('dispatchToVehicleTable')
     </script>
 @endscript

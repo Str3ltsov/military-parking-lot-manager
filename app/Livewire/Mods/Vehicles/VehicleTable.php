@@ -6,11 +6,12 @@ namespace App\Livewire\Mods\Vehicles;
 
 use App\Enums\VehicleCondition;
 use App\Enums\VehicleStatus;
-use App\Services\VehicleService;
+use App\Queries\VehicleQuery;
 use DateTimeImmutable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -19,28 +20,36 @@ final class VehicleTable extends Component
     use WithPagination;
 
     /** @var ?string department filter. */
-    public ?string $department;
+    #[Url]
+    public ?string $department = null;
 
     /** @var ?string brand filter. */
-    public ?string $brand;
+    #[Url]
+    public ?string $brand = null;
 
     /** @var ?string number filter. */
-    public ?string $number;
+    #[Url]
+    public ?string $number = null;
 
     /** @var ?string assigned filter. */
-    public ?string $assigned;
+    #[Url]
+    public ?string $assigned = null;
 
     /** @var ?string condition filter. */
-    public ?string $condition;
+    #[Url]
+    public ?string $condition = null;
 
     /** @var ?string location filter. */
-    public ?string $location;
+    #[Url]
+    public ?string $location = null;
 
     /** @var ?DateTimeImmutable expected_to_return filter. */
-    public ?DateTimeImmutable $expected_to_return;
+    #[Url(as: 'return')]
+    public ?DateTimeImmutable $expected_to_return = null;
 
     /** @var ?string status filter. */
-    public ?string $status;
+    #[Url]
+    public ?string $status = null;
 
     /**
      * Update filters on vehicle-filter-form-changed event.
@@ -65,15 +74,25 @@ final class VehicleTable extends Component
         $this->expected_to_return = $expected_to_return;
         $this->status = $status;
 
+        $this->resetPage();
+
         logger()->info('Updated filters on vehicle-filter-form-changed event.');
     }
 
     /**
      * Vehicle table controller.
      */
-    public function render(VehicleService $vehicleService): View
+    public function render(VehicleQuery $vehicleQuery): View
     {
-        $vehicles = $vehicleService->getPaginatedVehicles(20);
+        $vehicles = $vehicleQuery->init()
+            ->withAndWhereDepartment($this->department)
+            ->withAndWhereSoldier($this->assigned)
+            ->withAndWhereLocation($this->location)
+            ->withAndWhereReproduction($this->brand)
+            ->whereNumber($this->number)
+            ->whereCondition($this->condition)
+            ->whereStatus($this->status)
+            ->paginate(20);
 
         return view('livewire.mods.vehicles.vehicle-table', [
             'vehicles' => $vehicles,
