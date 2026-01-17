@@ -76,7 +76,7 @@ final class VehicleTable extends Component
 
         $this->resetPage();
 
-        logger()->info('Updated filters on vehicle-filter-form-changed event.');
+        logger()->info('Updated filters in vehicle-table on vehicle-filter-form-changed event.');
     }
 
     /**

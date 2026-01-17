@@ -67,7 +67,7 @@ final class VehicleFilterForm extends Component
         )
             ->to(VehicleTable::class);
 
-        logger()->info('Dispatched vehicle-filter-form-changed event from vehicle-filter-form component.');
+        logger()->info('Dispatched vehicle-filter-form-changed event from vehicle-filter-form to vehicle-table.');
     }
 
     /**
@@ -96,6 +96,25 @@ final class VehicleFilterForm extends Component
 
             $this->dispatchToVehicleTable();
         }
+    }
+
+    /**
+     * Clears filter query parameters.
+     */
+    public function clearFilters(): void
+    {
+        $this->department = null;
+        $this->brand = null;
+        $this->number = null;
+        $this->assigned = null;
+        $this->condition = null;
+        $this->location = null;
+        $this->expected_to_return = null;
+        $this->status = null;
+
+        $this->dispatchToVehicleTable();
+
+        logger()->info('Cleared filters in vehicle vehicle-filter-form.');
     }
 
     /**

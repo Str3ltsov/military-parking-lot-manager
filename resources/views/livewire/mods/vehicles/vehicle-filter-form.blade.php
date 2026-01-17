@@ -93,7 +93,7 @@
 
     <!-- Clear all filters button -->
     <div>
-        <button type="button">Clear</button>
+        <button type="button" wire:click="clearFilters">Clear</button>
     </div>
 </div>
 
