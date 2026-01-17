@@ -15,8 +15,13 @@ return new class extends Migration
     {
         Schema::create('reproductions', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
+
             $table->string('name', 20);
+            $table->timestamps();
+
+            $table->index('name');
         });
     }
 

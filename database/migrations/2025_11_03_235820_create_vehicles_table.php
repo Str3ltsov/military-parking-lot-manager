@@ -17,16 +17,22 @@ return new class extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('department_id')->constrained('departments');
             $table->foreignId('soldier_id')->constrained('soldiers');
             $table->foreignId('location_id')->constrained('locations');
             $table->foreignId('reproduction_id')->constrained('reproductions');
+
             $table->string('plate_number', 6)->unique();
             $table->string('condition', 15)->default(VehicleCondition::GOOD->value);
             $table->string('status', 15)->default(VehicleStatus::AVAILABLE->value);
             $table->tinyText('notes_problems')->nullable();
             $table->dateTime('expected_to_return_at')->nullable();
             $table->timestamps();
+
+            $table->index('condition');
+            $table->index('status');
+            $table->index('expected_to_return_at');
         });
     }
 

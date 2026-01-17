@@ -24,10 +24,10 @@
                         <td>{{ $vehicle->reproduction->nameWithBrand() }}</td>
                         <td>{{ $vehicle->plate_number }}</td>
                         <td>{{ $vehicle->soldier->fullNameWithRank() }}</td>
-                        <td>{{ $vehicle->condition }}</td>
+                        <td>{{ $vehicle->condition->label() }}</td>
                         <td>{{ $vehicle->location->name }}</td>
                         <td>{{ $vehicle->expected_to_return_at ?? '-' }}</td>
-                        <td>{{ $vehicle->status }}</td>
+                        <td>{{ $vehicle->status->label() }}</td>
                         <td>{{ $vehicle->notes_problems ?? '-' }}</td>
                     </tr>
                 @empty

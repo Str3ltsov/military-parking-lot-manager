@@ -21,11 +21,6 @@ final class Reproduction extends Model
     use HasFactory;
 
     /**
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * @var list<string>
      */
     protected $fillable = [
@@ -36,7 +31,10 @@ final class Reproduction extends Model
     /**
      * @var array<string, string>
      */
-    protected $casts = [];
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 
     /**
      * Get the brand of the reproduction.
