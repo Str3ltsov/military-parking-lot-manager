@@ -1,6 +1,6 @@
 <div>
     <!-- Vehicle table -->
-    <div>
+    <div wire:loading.remove>
         <table>
             <thead>
                 <tr>
@@ -40,7 +40,12 @@
     </div>
 
     <!-- Vehicle table pagination -->
-    <div>
+    <div wire:loading.remove>
         {{ $vehicles->links() }}
+    </div>
+
+    <!-- Loading -->
+    <div wire:loading> 
+        <p>Loading...</p>
     </div>
 </div>
