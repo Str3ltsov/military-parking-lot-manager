@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Livewire\Mods\Vehicles;
 
-use App\Enums\VehicleCondition;
-use App\Enums\VehicleStatus;
 use App\Queries\VehicleQuery;
+use App\Traits\VehicleFilterRules;
 use DateTimeImmutable;
 use Illuminate\Contracts\View\View;
-use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -17,7 +15,7 @@ use Livewire\WithPagination;
 
 final class VehicleTable extends Component
 {
-    use WithPagination;
+    use VehicleFilterRules, WithPagination;
 
     /** @var ?string department filter. */
     #[Url]
@@ -104,30 +102,6 @@ final class VehicleTable extends Component
      */
     protected function rules(): array
     {
-        return [
-            'department' => 'nullable|string',
-            'brand' => 'nullable|string',
-            'number' => 'nullable|string',
-            'assigned' => 'nullable|string',
-            'condition' => [
-                'nullable',
-                'string',
-                Rule::in([
-                    VehicleCondition::GOOD->value,
-                    VehicleCondition::BAD->value,
-                ]),
-            ],
-            'location' => 'nullable|string',
-            'expected_to_return' => 'nullable|date',
-            'status' => [
-                'nullable',
-                'string',
-                Rule::in([
-                    VehicleStatus::AVAILABLE->value,
-                    VehicleStatus::LEFT->value,
-                    VehicleStatus::OUT_OF_ORDER->value,
-                ]),
-            ],
-        ];
+        return $this->vehicleFilterRules();
     }
 }

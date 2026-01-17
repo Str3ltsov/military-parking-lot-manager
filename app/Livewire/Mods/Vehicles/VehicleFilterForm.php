@@ -7,15 +7,17 @@ namespace App\Livewire\Mods\Vehicles;
 use App\Enums\VehicleCondition;
 use App\Enums\VehicleStatus;
 use App\Services\DepartmentService;
+use App\Traits\VehicleFilterRules;
 use DateTimeImmutable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Validation\Rule;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
 final class VehicleFilterForm extends Component
 {
+    use VehicleFilterRules;
+
     /** @var ?string department filter query parameter. */
     #[Url]
     public ?string $department = null;
@@ -139,30 +141,6 @@ final class VehicleFilterForm extends Component
      */
     protected function rules(): array
     {
-        return [
-            'department' => 'nullable|string',
-            'brand' => 'nullable|string',
-            'number' => 'nullable|string',
-            'assigned' => 'nullable|string',
-            'condition' => [
-                'nullable',
-                'string',
-                Rule::in([
-                    VehicleCondition::GOOD->value,
-                    VehicleCondition::BAD->value,
-                ]),
-            ],
-            'location' => 'nullable|string',
-            'expected_to_return' => 'nullable|date',
-            'status' => [
-                'nullable',
-                'string',
-                Rule::in([
-                    VehicleStatus::AVAILABLE->value,
-                    VehicleStatus::LEFT->value,
-                    VehicleStatus::OUT_OF_ORDER->value,
-                ]),
-            ],
-        ];
+        return $this->vehicleFilterRules();
     }
 }
